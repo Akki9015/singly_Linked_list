@@ -1,0 +1,143 @@
+
+/*
+  This is all about of singly linked list where we learn many things that how to make a node and how we can 
+  declare the node and how to connect all the nodes from the linked list.. We mainly discuss about these topics
+  (1) How to insert node at beginning of the linked list.
+  (2) How to insert node at the end of the linked list ..
+  (3) How to insert node at the middle of the linked list ..
+  (4) How to delete node of a linked  list..
+  (5) How to take elements of given index in a linked list ..
+ */
+
+
+
+
+
+//this is Main class of java in which Main is also include.. 
+
+
+public class singly_linkedlist {
+    public static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
+    }
+//In this class of linked_list where all the function is declared and this function is called in Main class.
+
+
+    public static class linked_list{
+        Node head=null;
+        Node tail=null;
+        int size=0;
+        //this function insert elements in the last of the linked list.
+        void insertAtEnd(int val){
+            Node temp=new Node(val);
+            if(head==null){
+                head=temp;
+            }
+            else{
+                tail.next=temp;
+        }
+        tail=temp;
+        size++;
+    }  
+    //This function insert element in the starting of the linked list ...
+
+
+    void insertAtHead(int val){
+        Node temp=new Node(val);
+        if(head==null){
+            head=tail=temp;
+        }
+        else{
+            temp.next=head;
+            head=temp;
+        }
+        size++;
+    }
+    //This Function insert the element in the particular index which index and element is given by user ..
+
+      void insertAt(int idx,int val){
+    Node t= new Node(val);
+    Node temp=head;
+    if(idx==size){
+        insertAtEnd(val);
+        return;
+    }
+    else if(idx==0){
+        insertAtHead(val);
+        return;
+    }
+    else if(idx<0 || idx>size){
+        System.out.println("Wrong idex we cannot provide u answer");
+        return;
+    }
+    for(int i=1; i<=idx-1;i++){
+        temp=temp.next;
+    }
+    t.next=temp.next;
+    temp.next=t;
+    size++;
+   }
+    // This function delete the elements in the linked list and decrease the size of the linked list simultaneously.
+
+   void deleteAt(int idx){
+    if(idx==0){
+        head=head.next;
+        size--;
+        return;
+    }
+    Node temp=head;
+    for(int i=1;i<=idx-1;i++){
+        temp=temp.next;
+    }
+    temp.next=temp.next.next;
+    tail=temp;
+    size--;
+   }
+   //get the element from that index in which user...
+
+   int getAt(int idx){
+    if(idx<0 || idx>size){
+        System.out.println("Wrong index");
+        return -1;
+    }
+    Node temp=head;
+    for(int i=1;i<=idx;i++){
+        temp=temp.next;
+    }
+    return temp.data;
+   }
+   // This is display function who display all the elements in the output on the screen of the linked list..
+
+    void display(){
+        Node temp = head;
+        while(temp!=null){
+            System.out.println(temp.data+" ");
+            temp=temp.next;
+        }
+   }
+}
+// This is the main Class where we call the function to take our suitable output..
+
+    public static void main(String[] args) {
+        linked_list ll = new linked_list();
+        ll.insertAtEnd(5);
+        ll.insertAtEnd(4);
+        ll.insertAtEnd(6);
+        ll.insertAtHead(100);
+        ll.insertAt(2,50);
+        ll.display();
+        System.out.println("Size of linked list = " +ll.size);
+        // System.out.println(ll.size);
+        System.out.println("The Element of that index is "+ll.getAt(3));
+        //System.out.println(ll.getAt(3)); 
+        ll.deleteAt(0);
+        ll.display();
+        System.out.println("Size of linked list = " +ll.size);
+
+    }
+}
